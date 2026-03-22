@@ -1,0 +1,84 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/manifest.json",
+  "type": "Manifest",
+  "label": {
+    "ja": ["デジタル源氏物語 機能紹介：パタパタ顔比較"],
+    "en": ["Digital Tale of Genji: Patapata Face Comparison"]
+  },
+  "summary": {
+    "ja": ["デジタル源氏物語の「パタパタ顔比較」機能を紹介する動画です。"],
+    "en": ["A video introducing the 'Patapata Face Comparison' feature of Digital Tale of Genji."]
+  },
+  "metadata": [
+    {
+      "label": { "en": ["Source"] },
+      "value": { "en": ["<a href='https://www.youtube.com/watch?v=z0lbaSYi3ds'>YouTube</a>"] }
+    }
+  ],
+  "items": [
+    {
+      "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas",
+      "type": "Canvas",
+      "duration": 98.37,
+      "width": 1920,
+      "height": 1080,
+      "items": [
+        {
+          "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas/page",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas/page/annotation",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/video.mp4",
+                "type": "Video",
+                "format": "video/mp4",
+                "duration": 98.37,
+                "width": 1920,
+                "height": 1080
+              },
+              "target": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas"
+            }
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas/annotations",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas/annotations/ja",
+              "type": "Annotation",
+              "motivation": "supplementing",
+              "label": { "ja": ["日本語"] },
+              "body": {
+                "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/ja.vtt",
+                "type": "Text",
+                "format": "text/vtt",
+                "language": "ja"
+              },
+              "target": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas"
+            },
+            {
+              "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas/annotations/en",
+              "type": "Annotation",
+              "motivation": "supplementing",
+              "label": { "en": ["English"] },
+              "body": {
+                "id": "https://nakamura196.github.io/genji-movie/videos/patapata-face/en.vtt",
+                "type": "Text",
+                "format": "text/vtt",
+                "language": "en"
+              },
+              "target": "https://nakamura196.github.io/genji-movie/videos/patapata-face/canvas"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

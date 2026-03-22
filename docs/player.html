@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デジタル源氏物語 - Video Player</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    background: #1a1a2e; color: #eee;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .back-link { align-self: flex-start; max-width: 960px; width: 100%; margin: 0 auto 12px; }
+  .back-link a { color: #aaa; text-decoration: none; font-size: 0.85rem; }
+  .back-link a:hover { color: #e94560; }
+  h1 { font-size: 1.3rem; margin-bottom: 16px; color: #e0e0e0; max-width: 960px; text-align: center; }
+
+  .player-container {
+    width: 100%; max-width: 960px;
+    background: #16213e; border-radius: 12px;
+    overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .video-wrapper { position: relative; }
+  video { width: 100%; display: block; }
+  .custom-subtitle {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: #fff; font-size: 1.1rem;
+    padding: 6px 16px; border-radius: 4px;
+    max-width: 90%; text-align: center;
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+    pointer-events: none; display: none; z-index: 10;
+  }
+
+  .controls {
+    padding: 10px 16px; display: flex; align-items: center; gap: 10px;
+    background: #0f3460; flex-wrap: wrap;
+  }
+  .controls button {
+    background: none; border: none; color: #eee;
+    font-size: 1.3rem; cursor: pointer; padding: 4px 8px;
+    border-radius: 4px; transition: background 0.2s;
+  }
+  .controls button:hover { background: rgba(255,255,255,0.15); }
+  .time { font-size: 0.85rem; color: #aaa; min-width: 100px; text-align: center; }
+  .progress-bar {
+    flex: 1; height: 6px; background: #333;
+    border-radius: 3px; cursor: pointer; min-width: 200px;
+  }
+  .progress-fill {
+    height: 100%; background: #e94560; border-radius: 3px;
+    width: 0%; transition: width 0.1s linear;
+  }
+  .ctrl-btn {
+    font-size: 0.8rem !important;
+    border: 1px solid #555 !important;
+    padding: 2px 10px !important; white-space: nowrap;
+  }
+  .ctrl-btn.active { background: #e94560 !important; border-color: #e94560 !important; }
+
+  .narration-panel {
+    max-width: 960px; width: 100%; margin-top: 16px;
+    background: #16213e; border-radius: 12px;
+    overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .narration-header {
+    padding: 10px 16px; background: #0f3460;
+    font-weight: bold; font-size: 0.9rem;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .narration-header .btns { display: flex; gap: 6px; flex-wrap: wrap; }
+  .narration-header button {
+    background: none; border: 1px solid #555; color: #eee;
+    padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;
+  }
+  .narration-header button:hover { background: rgba(255,255,255,0.15); }
+  .narration-header button.active { background: #e94560; border-color: #e94560; }
+
+  .voice-select {
+    padding: 10px 16px; background: #0a1a3a;
+    display: none; gap: 10px; align-items: center; font-size: 0.85rem;
+  }
+  .voice-select.show { display: flex; flex-wrap: wrap; }
+  .voice-select label { color: #aaa; }
+  .voice-select select, .voice-select input {
+    background: #1a2a4e; color: #eee; border: 1px solid #444;
+    border-radius: 4px; padding: 4px 8px; font-size: 0.8rem;
+  }
+
+  .narration-body { padding: 12px; max-height: 300px; overflow-y: auto; }
+  .cue-item {
+    padding: 6px 10px; margin-bottom: 3px; border-radius: 6px;
+    cursor: pointer; transition: background 0.2s;
+    display: flex; gap: 10px; font-size: 0.88rem; line-height: 1.5;
+    border-left: 3px solid transparent;
+  }
+  .cue-item:hover { background: rgba(255,255,255,0.08); }
+  .cue-item.active { background: rgba(233,69,96,0.2); border-left-color: #e94560; }
+  .cue-item.speaking { background: rgba(83,166,250,0.15); border-left-color: #53a6fa; }
+  .cue-time {
+    color: #e94560; font-size: 0.78rem; min-width: 55px;
+    padding-top: 2px; font-family: monospace;
+  }
+  .cue-text { flex: 1; }
+  .loading { text-align: center; padding: 60px; color: #aaa; }
+
+  .narration-body::-webkit-scrollbar { width: 6px; }
+  .narration-body::-webkit-scrollbar-track { background: transparent; }
+  .narration-body::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="back-link"><a href="index.html">&larr; 動画一覧に戻る</a></div>
+<h1 id="title">読み込み中...</h1>
+
+<div class="player-container">
+  <div class="video-wrapper">
+    <video id="video" crossorigin="anonymous"></video>
+    <div class="custom-subtitle" id="customSub"></div>
+  </div>
+  <div class="controls">
+    <button id="playBtn" title="再生/停止">▶</button>
+    <span class="time" id="timeDisplay">0:00 / 0:00</span>
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <button class="ctrl-btn" id="speedBtn" title="再生速度">1x</button>
+    <button class="ctrl-btn active" id="langBtn" title="字幕言語切替">🇯🇵 日本語</button>
+    <button class="ctrl-btn" id="ttsBtn" title="音声読み上げ">🔇 読み上げOFF</button>
+    <button id="fullscreenBtn" title="全画面">⛶</button>
+  </div>
+</div>
+
+<div class="narration-panel">
+  <div class="narration-header">
+    <span>字幕・ナレーション</span>
+    <div class="btns">
+      <button id="autoScrollBtn" class="active">自動スクロール</button>
+      <button id="voiceSettingBtn">音声設定</button>
+    </div>
+  </div>
+  <div class="voice-select" id="voiceSettings">
+    <label>音声: <select id="voiceList"></select></label>
+    <label>速度: <input type="range" id="ttsRate" min="0.5" max="2" step="0.1" value="1.2"><span id="ttsRateVal">1.2</span></label>
+    <label>高さ: <input type="range" id="ttsPitch" min="0.5" max="2" step="0.1" value="1.0"><span id="ttsPitchVal">1.0</span></label>
+  </div>
+  <div class="narration-body" id="narrationBody">
+    <div class="loading">マニフェストを読み込み中...</div>
+  </div>
+</div>
+
+<script>
+const video = document.getElementById('video');
+const playBtn = document.getElementById('playBtn');
+const timeDisplay = document.getElementById('timeDisplay');
+const progressBar = document.getElementById('progressBar');
+const progressFill = document.getElementById('progressFill');
+const speedBtn = document.getElementById('speedBtn');
+const langBtn = document.getElementById('langBtn');
+const ttsBtn = document.getElementById('ttsBtn');
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+const narrationBody = document.getElementById('narrationBody');
+const autoScrollBtn = document.getElementById('autoScrollBtn');
+const voiceSettingBtn = document.getElementById('voiceSettingBtn');
+const voiceSettings = document.getElementById('voiceSettings');
+const voiceList = document.getElementById('voiceList');
+const ttsRate = document.getElementById('ttsRate');
+const ttsPitch = document.getElementById('ttsPitch');
+const ttsRateVal = document.getElementById('ttsRateVal');
+const ttsPitchVal = document.getElementById('ttsPitchVal');
+const customSub = document.getElementById('customSub');
+
+let autoScroll = true;
+let ttsEnabled = false;
+let lastSpokenIndex = -1;
+let currentLang = 'ja';
+let tracks = {};
+const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+let speedIndex = 2;
+const synth = window.speechSynthesis;
+
+// --- Load IIIF Manifest ---
+async function loadManifest() {
+  const params = new URLSearchParams(window.location.search);
+  const manifestUrl = params.get('manifest');
+  if (!manifestUrl) {
+    narrationBody.innerHTML = '<div class="loading">manifest パラメータが指定されていません。</div>';
+    return;
+  }
+
+  const resp = await fetch(manifestUrl);
+  const manifest = await resp.json();
+
+  // Set title
+  const label = manifest.label;
+  document.getElementById('title').textContent =
+    (label.ja && label.ja[0]) || (label.en && label.en[0]) || 'Video Player';
+  document.title = document.getElementById('title').textContent;
+
+  // Get canvas
+  const canvas = manifest.items[0];
+
+  // Set video source
+  const videoBody = canvas.items[0].items[0].body;
+  const baseUrl = manifestUrl.substring(0, manifestUrl.lastIndexOf('/') + 1);
+
+  let videoUrl = videoBody.id;
+  // Handle relative URLs
+  if (!videoUrl.startsWith('http')) {
+    videoUrl = baseUrl + videoUrl.split('/').pop();
+  }
+  video.src = videoUrl;
+
+  // Load VTT tracks from annotations
+  if (canvas.annotations && canvas.annotations.length > 0) {
+    const annotations = canvas.annotations[0].items;
+    for (const ann of annotations) {
+      let vttUrl = ann.body.id;
+      if (!vttUrl.startsWith('http')) {
+        vttUrl = baseUrl + vttUrl.split('/').pop();
+      }
+      const lang = ann.body.language || 'ja';
+      const trackEl = document.createElement('track');
+      trackEl.kind = 'subtitles';
+      trackEl.src = vttUrl;
+      trackEl.srclang = lang;
+      trackEl.label = (ann.label && (ann.label[lang] || ann.label.ja || ann.label.en || [])[0]) || lang;
+      video.appendChild(trackEl);
+      tracks[lang] = trackEl;
+    }
+  }
+
+  // Initialize tracks
+  video.addEventListener('loadedmetadata', () => {
+    for (const [lang, trackEl] of Object.entries(tracks)) {
+      trackEl.track.mode = lang === currentLang ? 'hidden' : 'disabled';
+    }
+    waitForCues();
+  });
+}
+
+function getActiveTrack() {
+  return tracks[currentLang] ? tracks[currentLang].track : null;
+}
+
+function waitForCues() {
+  const check = setInterval(() => {
+    const t = getActiveTrack();
+    if (t && t.cues && t.cues.length > 0) {
+      clearInterval(check);
+      buildCueList(t.cues);
+    }
+  }, 100);
+}
+
+// --- Language switch ---
+langBtn.addEventListener('click', () => {
+  synth.cancel();
+  lastSpokenIndex = -1;
+  const langs = Object.keys(tracks);
+  const idx = langs.indexOf(currentLang);
+  currentLang = langs[(idx + 1) % langs.length];
+
+  for (const [lang, trackEl] of Object.entries(tracks)) {
+    trackEl.track.mode = lang === currentLang ? 'hidden' : 'disabled';
+  }
+
+  langBtn.textContent = currentLang === 'ja' ? '🇯🇵 日本語' : '🇬🇧 English';
+  waitForCues();
+});
+
+// --- Play/Pause ---
+playBtn.addEventListener('click', () => {
+  if (video.paused) video.play(); else video.pause();
+});
+video.addEventListener('play', () => { playBtn.textContent = '⏸'; lastSpokenIndex = -1; });
+video.addEventListener('pause', () => { playBtn.textContent = '▶'; synth.cancel(); });
+video.addEventListener('ended', () => { synth.cancel(); playBtn.textContent = '▶'; });
+
+// --- Time ---
+function fmt(s) {
+  const m = Math.floor(s / 60);
+  return m + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+}
+video.addEventListener('timeupdate', () => {
+  timeDisplay.textContent = fmt(video.currentTime) + ' / ' + fmt(video.duration || 0);
+  progressFill.style.width = ((video.currentTime / (video.duration || 1)) * 100) + '%';
+  highlightCue();
+  handleTTS();
+  updateCustomSub();
+});
+
+// --- Seek ---
+progressBar.addEventListener('click', (e) => {
+  const rect = progressBar.getBoundingClientRect();
+  video.currentTime = ((e.clientX - rect.left) / rect.width) * video.duration;
+  lastSpokenIndex = -1; synth.cancel();
+});
+
+// --- Speed ---
+speedBtn.addEventListener('click', () => {
+  speedIndex = (speedIndex + 1) % speeds.length;
+  video.playbackRate = speeds[speedIndex];
+  speedBtn.textContent = speeds[speedIndex] + 'x';
+});
+
+// --- TTS ---
+ttsBtn.addEventListener('click', () => {
+  ttsEnabled = !ttsEnabled;
+  ttsBtn.textContent = ttsEnabled ? '🔊 読み上げON' : '🔇 読み上げOFF';
+  ttsBtn.classList.toggle('active', ttsEnabled);
+  if (!ttsEnabled) { synth.cancel(); clearSpeakingHighlight(); }
+  lastSpokenIndex = -1;
+});
+
+fullscreenBtn.addEventListener('click', () => {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else document.querySelector('.player-container').requestFullscreen();
+});
+
+autoScrollBtn.addEventListener('click', () => {
+  autoScroll = !autoScroll;
+  autoScrollBtn.classList.toggle('active', autoScroll);
+});
+
+voiceSettingBtn.addEventListener('click', () => voiceSettings.classList.toggle('show'));
+ttsRate.addEventListener('input', () => ttsRateVal.textContent = ttsRate.value);
+ttsPitch.addEventListener('input', () => ttsPitchVal.textContent = ttsPitch.value);
+
+// --- Voice setup ---
+function loadVoices() {
+  const voices = synth.getVoices();
+  voiceList.innerHTML = '';
+  const jaVoices = voices.filter(v => v.lang.startsWith('ja'));
+  const otherVoices = voices.filter(v => !v.lang.startsWith('ja'));
+  [...jaVoices, ...otherVoices].forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v.name;
+    opt.textContent = `${v.name} (${v.lang})`;
+    if (v.lang.startsWith('ja')) opt.style.fontWeight = 'bold';
+    voiceList.appendChild(opt);
+  });
+}
+synth.addEventListener('voiceschanged', loadVoices);
+loadVoices();
+
+// --- Cue list ---
+function buildCueList(cues) {
+  narrationBody.innerHTML = '';
+  for (let i = 0; i < cues.length; i++) {
+    const cue = cues[i];
+    const item = document.createElement('div');
+    item.className = 'cue-item';
+    item.dataset.index = i;
+    item.innerHTML = `<span class="cue-time">${fmt(cue.startTime)}</span><span class="cue-text">${cue.text.replace(/\n/g, '<br>')}</span>`;
+    item.addEventListener('click', () => {
+      video.currentTime = cue.startTime;
+      lastSpokenIndex = -1; synth.cancel(); video.play();
+    });
+    narrationBody.appendChild(item);
+  }
+}
+
+function highlightCue() {
+  const t = getActiveTrack();
+  if (!t || !t.cues) return;
+  const items = narrationBody.querySelectorAll('.cue-item');
+  let activeItem = null;
+  items.forEach((item, i) => {
+    if (i >= t.cues.length) return;
+    const cue = t.cues[i];
+    const isActive = video.currentTime >= cue.startTime && video.currentTime < cue.endTime;
+    item.classList.toggle('active', isActive);
+    if (isActive) activeItem = item;
+  });
+  if (activeItem && autoScroll) {
+    activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function updateCustomSub() {
+  const t = getActiveTrack();
+  if (!t || !t.cues) { customSub.style.display = 'none'; return; }
+  let text = '';
+  for (let i = 0; i < t.cues.length; i++) {
+    if (video.currentTime >= t.cues[i].startTime && video.currentTime < t.cues[i].endTime) {
+      text = t.cues[i].text; break;
+    }
+  }
+  if (text) {
+    customSub.innerHTML = text.replace(/\n/g, '<br>');
+    customSub.style.display = 'block';
+  } else {
+    customSub.style.display = 'none';
+  }
+}
+
+function getSelectedVoice() {
+  const voices = synth.getVoices();
+  const selected = voiceList.value;
+  const langPrefix = currentLang === 'ja' ? 'ja' : 'en';
+  return voices.find(v => v.name === selected) || voices.find(v => v.lang.startsWith(langPrefix)) || voices[0];
+}
+
+function clearSpeakingHighlight() {
+  narrationBody.querySelectorAll('.cue-item.speaking').forEach(el => el.classList.remove('speaking'));
+}
+
+function handleTTS() {
+  if (!ttsEnabled || video.paused) return;
+  const t = getActiveTrack();
+  if (!t || !t.cues) return;
+  let activeIndex = -1;
+  for (let i = 0; i < t.cues.length; i++) {
+    if (video.currentTime >= t.cues[i].startTime && video.currentTime < t.cues[i].endTime) {
+      activeIndex = i; break;
+    }
+  }
+  if (activeIndex >= 0 && activeIndex !== lastSpokenIndex) {
+    synth.cancel(); clearSpeakingHighlight();
+    const cue = t.cues[activeIndex];
+    const utter = new SpeechSynthesisUtterance(cue.text);
+    utter.voice = getSelectedVoice();
+    utter.lang = currentLang === 'ja' ? 'ja-JP' : 'en-US';
+    utter.rate = parseFloat(ttsRate.value);
+    utter.pitch = parseFloat(ttsPitch.value);
+    const item = narrationBody.querySelector(`[data-index="${activeIndex}"]`);
+    if (item) item.classList.add('speaking');
+    utter.onend = () => { if (item) item.classList.remove('speaking'); };
+    lastSpokenIndex = activeIndex;
+    synth.speak(utter);
+  }
+}
+
+// --- Keyboard ---
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+  if (e.code === 'ArrowLeft') { video.currentTime -= 3; synth.cancel(); lastSpokenIndex = -1; }
+  if (e.code === 'ArrowRight') { video.currentTime += 3; synth.cancel(); lastSpokenIndex = -1; }
+  if (e.code === 'KeyT') ttsBtn.click();
+  if (e.code === 'KeyL') langBtn.click();
+});
+
+// --- Init ---
+loadManifest();
+</script>
+</body>
+</html>

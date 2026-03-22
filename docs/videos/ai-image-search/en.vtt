@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.000
+Digital Tale of Genji - Feature Introduction.
+
+00:00:03.000 --> 00:00:05.000
+We will explain the AI Image Search.
+
+00:00:05.000 --> 00:00:09.000
+AI Image Search cross-searches manuscript images based on the Koigenji Monogatari,
+
+00:00:09.000 --> 00:00:13.000
+finding pages with high text similarity across multiple manuscripts and printed editions.
+
+00:00:13.000 --> 00:00:15.000
+It is useful for finding image data of specific scenes in the Tale of Genji.
+
+00:00:15.000 --> 00:00:20.000
+The registration status shows searchable manuscripts and editions listed by chapter.
+
+00:00:20.000 --> 00:00:24.000
+Let us explain how similarity is calculated.
+
+00:00:24.000 --> 00:00:28.000
+First, text data is attached to each image using kuzushiji OCR.
+
+00:00:28.000 --> 00:00:32.000
+Then, the text data is compared with the Koigenji Monogatari at the double-page spread level.
+
+00:00:32.000 --> 00:00:35.000
+Results are displayed in order of highest similarity.
+
+00:00:35.000 --> 00:00:37.000
+Here is how to access the search screen.
+
+00:00:37.000 --> 00:00:41.000
+Access it from "AI Image Search Edition" in the menu.
+
+00:00:41.000 --> 00:00:43.000
+Click the menu item on the left side.
+
+00:00:43.000 --> 00:00:46.000
+Click the search button.
+
+00:00:46.000 --> 00:00:48.000
+We will explain the search workflow.
+
+00:00:48.000 --> 00:00:50.000
+Here are the steps to find image data of a specific scene.
+
+00:00:50.000 --> 00:00:55.000
+Step 1: Find the page in the Koigenji Monogatari that corresponds to the scene.
+
+00:00:55.000 --> 00:00:59.000
+Step 2: Select manuscript pages with high similarity.
+
+00:00:59.000 --> 00:01:04.000
+Step 3: Compare with the Koigenji Monogatari to confirm the correct page.
+
+00:01:04.000 --> 00:01:06.000
+Let us start with Step 1.
+
+00:01:06.000 --> 00:01:10.000
+Search the text of the Koigenji Monogatari.
+
+00:01:10.000 --> 00:01:14.000
+Enter a word from the scene. For example, "inuki."
+
+00:01:14.000 --> 00:01:17.000
+You can narrow results by specifying a chapter.
+
+00:01:17.000 --> 00:01:21.000
+Search results are displayed.
+
+00:01:21.000 --> 00:01:25.000
+The Koigenji Monogatari image and text are shown.
+
+00:01:25.000 --> 00:01:28.000
+Confirm whether this is the page of the scene you are looking for.
+
+00:01:28.000 --> 00:01:31.000
+Here are some search tips.
+
+00:01:31.000 --> 00:01:35.000
+Searches using different notation from the Koigenji Monogatari text will not produce hits.
+
+00:01:35.000 --> 00:01:38.000
+For example, searching "犬君" in kanji won't work; use "いぬき" in hiragana instead.
+
+00:01:38.000 --> 00:01:42.000
+Try switching between kanji and kana, with or without voiced marks.
+
+00:01:42.000 --> 00:01:45.000
+Now, Step 2.
+
+00:01:45.000 --> 00:01:49.000
+Select manuscript pages with high similarity scores.
+
+00:01:49.000 --> 00:01:53.000
+Select the manuscript pages to compare.
+
+00:01:53.000 --> 00:01:57.000
+The similarity calculation results are displayed.
+
+00:01:57.000 --> 00:02:01.000
+Items colored yellow are pages included in the Koigenji Monogatari.
+
+00:02:01.000 --> 00:02:05.000
+Traffic light icons indicate secondary use conditions.
+
+00:02:05.000 --> 00:02:09.000
+The Todai manuscript shows candidates at 46% and 41% similarity.
+
+00:02:09.000 --> 00:02:13.000
+Candidates from the University of Tokyo Faculty of Letters collection are also shown.
+
+00:02:13.000 --> 00:02:17.000
+Manuscript images are loading.
+
+00:02:17.000 --> 00:02:21.000
+Similarity scores are displayed for each manuscript.
+
+00:02:21.000 --> 00:02:25.000
+Secondary use condition icons can also be confirmed.
+
+00:02:25.000 --> 00:02:29.000
+Manuscripts from Tsukuba University and the Imperial Household Agency are also shown.
+
+00:02:29.000 --> 00:02:33.000
+Images of the Koigenji Monogatari page and high-similarity pages are displayed.
+
+00:02:33.000 --> 00:02:37.000
+You can compare manuscripts from different collections.
+
+00:02:37.000 --> 00:02:41.000
+Click a page number to display the manuscript image.
+
+00:02:41.000 --> 00:02:45.000
+Now, Step 3.
+
+00:02:45.000 --> 00:02:49.000
+Compare with the Koigenji Monogatari to confirm the correct page.
+
+00:02:49.000 --> 00:02:53.000
+It can be difficult to confirm content from images alone.
+
+00:02:53.000 --> 00:02:57.000
+Comparing the body text is recommended.
+
+00:02:57.000 --> 00:03:01.000
+Select "Compare by Text."
+
+00:03:01.000 --> 00:03:05.000
+Click "String Similarity Comparison."
+
+00:03:05.000 --> 00:03:09.000
+The comparison tool is loading.
+
+00:03:09.000 --> 00:03:13.000
+The text comparison tool is now displayed.
+
+00:03:13.000 --> 00:03:17.000
+Koigenji Monogatari text on the left, selected image text on the right.
+
+00:03:17.000 --> 00:03:21.000
+Comparison results are shown in the center.
+
+00:03:21.000 --> 00:03:25.000
+Continuing with text comparison.
+
+00:03:25.000 --> 00:03:29.000
+The "Image" tab shows the Koigenji Monogatari and manuscript images side by side.
+
+00:03:29.000 --> 00:03:33.000
+The "Text (Diff)" tab shows text differences.
+
+00:03:33.000 --> 00:03:37.000
+Blue lines indicate corresponding sections between the texts.
+
+00:03:37.000 --> 00:03:41.000
+Here are some additional features.
+
+00:03:41.000 --> 00:03:45.000
+Links to related materials.
+
+00:03:45.000 --> 00:03:49.000
+A link to the Koigenji Monogatari at the National Diet Library.
+
+00:03:49.000 --> 00:03:53.000
+A link to the Shinpen Nihon Koten Bungaku Zenshu on JapanKnowledge.
+
+00:03:53.000 --> 00:03:57.000
+The Koigenji Monogatari text viewer is displayed.
+
+00:03:57.000 --> 00:04:01.000
+The corresponding page in the National Diet Library Digital Collection opens.
+
+00:04:01.000 --> 00:04:05.000
+A scanned image of the Koigenji Monogatari is displayed.
+
+00:04:05.000 --> 00:04:09.000
+The link to the Shinpen Nihon Koten Bungaku Zenshu is also available.
+
+00:04:09.000 --> 00:04:13.000
+You can view the corresponding section on JapanKnowledge Lib.
+
+00:04:13.000 --> 00:04:15.000
+Here is how to check secondary use conditions.
+
+00:04:15.000 --> 00:04:17.000
+Traffic light icons indicate the conditions.
+
+00:04:17.000 --> 00:04:19.000
+Green means free use, yellow means conditional, red means application required.
+
+00:04:19.000 --> 00:04:22.000
+About the heart button.
+
+00:04:22.000 --> 00:04:25.000
+Click it when the result matches what you are looking for.
+
+00:04:25.000 --> 00:04:28.000
+The number of hearts serves as a guide to similarity.
+
+00:04:28.000 --> 00:04:31.000
+Login is required to use this feature.
+
+00:04:31.000 --> 00:04:34.000
+Please check the privacy policy for handling of authentication information.
+
+00:04:34.000 --> 00:04:37.000
+Digital Tale of Genji.
+
+00:04:37.000 --> 00:04:40.000
+Thank you for watching.

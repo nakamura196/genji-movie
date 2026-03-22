@@ -1,0 +1,14 @@
+# Extracted frames
+frames/
+scenes/
+scenes_ai/
+scenes_patapata/
+
+# Root-level working files (not in docs/)
+/*.mp4
+/*.vtt
+/*.narration.txt
+/player.html
+
+# macOS
+.DS_Store

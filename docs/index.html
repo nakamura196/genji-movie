@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デジタル源氏物語 動画字幕プロジェクト</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    background: #1a1a2e; color: #eee;
+    min-height: 100vh; padding: 40px 20px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin-bottom: 8px; }
+  .subtitle { color: #aaa; margin-bottom: 32px; font-size: 0.9rem; }
+  .video-list { display: grid; gap: 20px; }
+  .video-card {
+    background: #16213e; border-radius: 12px; padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  .video-card:hover { transform: translateY(-2px); }
+  .video-card h2 { font-size: 1.1rem; margin-bottom: 4px; }
+  .video-card .desc { color: #aaa; font-size: 0.85rem; margin-bottom: 12px; }
+  .video-card .links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .video-card a {
+    display: inline-block; padding: 6px 16px;
+    background: #0f3460; color: #eee; text-decoration: none;
+    border-radius: 6px; font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+  .video-card a:hover { background: #e94560; }
+  .video-card .manifest-url {
+    display: block; margin-top: 8px;
+    font-size: 0.75rem; color: #666;
+    word-break: break-all;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>デジタル源氏物語 動画字幕プロジェクト</h1>
+  <p class="subtitle">Digital Tale of Genji - Video Subtitle Project</p>
+
+  <div class="video-list">
+    <div class="video-card">
+      <h2>画像とテキストを一緒にみる</h2>
+      <p class="desc">Viewing Images and Text Together (2:42)</p>
+      <div class="links">
+        <a href="player.html?manifest=videos/image-and-text/manifest.json">Player</a>
+        <a href="videos/image-and-text/manifest.json">IIIF Manifest</a>
+        <a href="https://www.youtube.com/watch?v=Q71OMYgRBvY" target="_blank">YouTube</a>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <h2>AI画像検索（改訂版）</h2>
+      <p class="desc">AI Image Search - Revised (4:19)</p>
+      <div class="links">
+        <a href="player.html?manifest=videos/ai-image-search/manifest.json">Player</a>
+        <a href="videos/ai-image-search/manifest.json">IIIF Manifest</a>
+        <a href="https://www.youtube.com/watch?v=57QKnIF5JWs" target="_blank">YouTube</a>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <h2>パタパタ顔比較</h2>
+      <p class="desc">Patapata Face Comparison (1:38)</p>
+      <div class="links">
+        <a href="player.html?manifest=videos/patapata-face/manifest.json">Player</a>
+        <a href="videos/patapata-face/manifest.json">IIIF Manifest</a>
+        <a href="https://www.youtube.com/watch?v=z0lbaSYi3ds" target="_blank">YouTube</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

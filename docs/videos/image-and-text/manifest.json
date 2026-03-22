@@ -1,0 +1,84 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/manifest.json",
+  "type": "Manifest",
+  "label": {
+    "ja": ["デジタル源氏物語 機能紹介：画像とテキストを一緒にみる"],
+    "en": ["Digital Tale of Genji: Viewing Images and Text Together"]
+  },
+  "summary": {
+    "ja": ["デジタル源氏物語の「画像とテキストを一緒にみる」機能を紹介する動画です。"],
+    "en": ["A video introducing the 'View Images and Text Together' feature of Digital Tale of Genji."]
+  },
+  "metadata": [
+    {
+      "label": { "en": ["Source"] },
+      "value": { "en": ["<a href='https://www.youtube.com/watch?v=Q71OMYgRBvY'>YouTube</a>"] }
+    }
+  ],
+  "items": [
+    {
+      "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas",
+      "type": "Canvas",
+      "duration": 162.27,
+      "width": 1920,
+      "height": 1080,
+      "items": [
+        {
+          "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas/page",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas/page/annotation",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/video.mp4",
+                "type": "Video",
+                "format": "video/mp4",
+                "duration": 162.27,
+                "width": 1920,
+                "height": 1080
+              },
+              "target": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas"
+            }
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas/annotations",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas/annotations/ja",
+              "type": "Annotation",
+              "motivation": "supplementing",
+              "label": { "ja": ["日本語"] },
+              "body": {
+                "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/ja.vtt",
+                "type": "Text",
+                "format": "text/vtt",
+                "language": "ja"
+              },
+              "target": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas"
+            },
+            {
+              "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas/annotations/en",
+              "type": "Annotation",
+              "motivation": "supplementing",
+              "label": { "en": ["English"] },
+              "body": {
+                "id": "https://nakamura196.github.io/genji-movie/videos/image-and-text/en.vtt",
+                "type": "Text",
+                "format": "text/vtt",
+                "language": "en"
+              },
+              "target": "https://nakamura196.github.io/genji-movie/videos/image-and-text/canvas"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

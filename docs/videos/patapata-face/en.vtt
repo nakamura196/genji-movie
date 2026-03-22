@@ -1,0 +1,100 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.000
+Digital Tale of Genji - Feature Introduction.
+
+00:00:03.000 --> 00:00:05.500
+We will explain the Patapata Face Comparison.
+
+00:00:05.500 --> 00:00:08.000
+A tool to easily compare Genji Hyakunin Isshu editions that look identical at first glance.
+
+00:00:08.000 --> 00:00:10.000
+For example, you can see the difference between closed eyes and open eyes.
+
+00:00:10.000 --> 00:00:13.500
+You can confirm differences in character faces using the image comparison tool.
+
+00:00:13.500 --> 00:00:15.500
+It uses vdiff.js.
+
+00:00:15.500 --> 00:00:17.000
+Published by the ROIS-DS Center for Open Data in the Humanities.
+
+00:00:17.000 --> 00:00:20.000
+About the origin of the name "Patapata Face Comparison."
+
+00:00:20.000 --> 00:00:23.000
+The motion resembles aori proofreading, where manuscripts are overlaid and flipped quickly.
+
+00:00:23.000 --> 00:00:25.000
+Please also refer to "About this page" for details.
+
+00:00:25.000 --> 00:00:28.000
+Access it from the menu screen.
+
+00:00:28.000 --> 00:00:30.000
+Select "Genji Hyakunin Isshu" under "Comparison of Illustration Images."
+
+00:00:30.000 --> 00:00:33.000
+Launch the image comparison tool.
+
+00:00:33.000 --> 00:00:35.000
+Click the "Compare (vdiff.js)" button.
+
+00:00:35.000 --> 00:00:39.000
+How to operate the image comparison tool.
+
+00:00:39.000 --> 00:00:42.000
+Move the dividing line left and right on the image.
+
+00:00:42.000 --> 00:00:45.000
+You can dynamically confirm the differing parts of the two images.
+
+00:00:45.000 --> 00:00:50.000
+Move the dividing line to check the differences.
+
+00:00:50.000 --> 00:00:55.000
+Here is a comparison example.
+
+00:00:55.000 --> 00:00:58.000
+Even back views that look identical have differences.
+
+00:00:58.000 --> 00:01:00.000
+The two editions are displayed side by side.
+
+00:01:00.000 --> 00:01:03.000
+Using patapata reveals a very slight difference in part of the hair.
+
+00:01:03.000 --> 00:01:07.000
+Even the smallest differences can be confirmed.
+
+00:01:07.000 --> 00:01:10.000
+Zoom in to examine the differences.
+
+00:01:10.000 --> 00:01:14.000
+Here are some additional features.
+
+00:01:14.000 --> 00:01:17.000
+The highlight display feature.
+
+00:01:17.000 --> 00:01:19.500
+Only the differing parts of the two images are emphasized with highlighting.
+
+00:01:19.500 --> 00:01:21.000
+Noise from differences in photography conditions is mechanically removed.
+
+00:01:21.000 --> 00:01:24.000
+The red-blue display feature.
+
+00:01:24.000 --> 00:01:27.000
+Differing parts of images are displayed in red and blue.
+
+00:01:27.000 --> 00:01:30.000
+Since noise removal is not performed, original differences can be confirmed.
+
+00:01:30.000 --> 00:01:33.000
+Digital Tale of Genji.
+
+00:01:33.000 --> 00:01:36.000
+Thank you for watching.
