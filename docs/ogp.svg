@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1a1a2e"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#e94560"/>
+  <circle cx="600" cy="240" r="80" fill="#0f3460" stroke="#e94560" stroke-width="3"/>
+  <text x="600" y="270" text-anchor="middle" font-size="80" font-family="serif" fill="#fff">源</text>
+  <text x="600" y="380" text-anchor="middle" font-size="40" font-family="sans-serif" fill="#eee">デジタル源氏物語</text>
+  <text x="600" y="430" text-anchor="middle" font-size="24" font-family="sans-serif" fill="#aaa">動画字幕プロジェクト / Video Subtitle Project</text>
+  <text x="600" y="480" text-anchor="middle" font-size="18" font-family="sans-serif" fill="#666">IIIF v3 Manifests × Bilingual VTT × Web Speech API</text>
+</svg>
