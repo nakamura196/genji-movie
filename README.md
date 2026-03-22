@@ -24,10 +24,11 @@ https://nakamura196.github.io/genji-movie/
 ## Structure
 
 ```
+articles/
+└── blog.md                 # How-to article
 docs/
 ├── index.html              # Video list page
 ├── player.html             # IIIF v3 manifest-based player
-├── blog.md                 # How-to article
 ├── favicon.svg / .ico
 ├── ogp.png
 └── videos/
@@ -51,7 +52,7 @@ docs/
 3. Claude Codeのマルチモーダル機能で各フレームの内容を読み取り
 4. タイムスタンプに合わせた1文単位のVTTファイルを日本語・英語で作成
 
-詳細は [blog.md](docs/blog.md) をご覧ください。
+詳細は [blog.md](articles/blog.md) をご覧ください。
 
 ## Technology
 
