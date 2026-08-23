@@ -65,7 +65,7 @@ docs/
 ## Related
 
 - [デジタル源氏物語](https://genji.dl.itc.u-tokyo.ac.jp/)
-- [IIIF Audio/Visual: 複数のVTTファイルの記述](https://zenn.dev/nakamura196/articles/ba1fc1624c0503)
+- [IIIF Audio/Visual: 複数のVTTファイルの記述](https://ldas.jp/ja/posts/iiif-audio-visual-describing-multiple-vtt-files/)
 
 ## License
 
